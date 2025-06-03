@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.stereotype.Repository
 
 @Repository
-interface LocationRepository: JpaRepository<Location, Long>, JpaSpecificationExecutor<Location> {
+interface LocationsRepository: JpaRepository<Location, Long>, JpaSpecificationExecutor<Location> {
 }

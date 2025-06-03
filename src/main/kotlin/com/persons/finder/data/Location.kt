@@ -7,16 +7,16 @@ data class Location(
 
     @Id
     @Column(name = "referenceId", unique = true, nullable = false)
-    var referenceId: Long,
+    var referenceId: Long = 0,
 
     @Column(name = "latitude", nullable = false)
-    var latitude: Double,
+    var latitude: Double = 0.0,
 
     @Column(name = "longitude", nullable = false)
-    var longitude: Double,
+    var longitude: Double = 0.0,
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "referenceId")
-    var person: Person? = null
+//    @OneToOne
+//    @MapsId
+//    @JoinColumn(name = "referenceId")
+//    var person: Person? = null
 )

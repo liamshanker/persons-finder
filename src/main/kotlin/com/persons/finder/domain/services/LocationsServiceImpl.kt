@@ -1,13 +1,14 @@
 package com.persons.finder.domain.services
 
 import com.persons.finder.data.Location
+import com.persons.finder.repository.LocationsRepository
 import org.springframework.stereotype.Service
 
 @Service
-class LocationsServiceImpl : LocationsService {
+class LocationsServiceImpl(private val locationsRepository: LocationsRepository) : LocationsService {
 
     override fun addLocation(location: Location) {
-        TODO("Not yet implemented")
+        locationsRepository.save(location)
     }
 
     override fun removeLocation(locationReferenceId: Long) {
