@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.stereotype.Repository
 
 @Repository
-interface PersonRepository: JpaRepository<Person, Long>, JpaSpecificationExecutor<Person> {
+interface PersonsRepository: JpaRepository<Person, Long>, JpaSpecificationExecutor<Person> {
     fun findByNameIgnoreCase(name: String): List<Person>
 }
