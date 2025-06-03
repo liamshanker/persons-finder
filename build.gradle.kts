@@ -12,6 +12,7 @@ version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
+	//Todo: restore when complete
 //	mavenCentral()
 	maven { url = uri("https://artifactory.gcp.anz/artifactory/gradle-plugins") }
 	maven { url = uri("https://artifactory.gcp.anz/artifactory/maven-central") }
