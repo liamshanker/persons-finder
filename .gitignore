@@ -50,3 +50,5 @@ gradle-app.setting
 
 .java-version
 .idea/**
+
+database/**
