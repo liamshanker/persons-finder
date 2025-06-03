@@ -17,9 +17,11 @@ class DataSeeder(@Value("\${seed.count}") private var seedCount: Int ) {
     fun seedDatabase(
         personsService: PersonsService,
         locationsService: LocationsService
-        ) = CommandLineRunner {
-
-
+        ): CommandLineRunner = CommandLineRunner {
+        if (seedCount <= 0) {
+            println("No seeding required, seed count is set to $seedCount. If seeding is required, please set a positive value for 'seed.count' in application properties.")
+            return@CommandLineRunner
+        }
         println("Seeding initial data...")
         for (i in 1..seedCount) {
             val person = Person(i.toLong(), "Person $i")
