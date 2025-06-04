@@ -1,7 +1,9 @@
 package com.persons.finder.presentation
 
 import com.persons.finder.data.Coordinates
+import com.persons.finder.data.NearbyPerson
 import com.persons.finder.data.Person
+import com.persons.finder.data.ResponseDto
 import com.persons.finder.domain.services.LocationsService
 import com.persons.finder.domain.services.PersonsService
 import org.springframework.http.HttpStatus
@@ -41,13 +43,23 @@ class PersonController (private val personsService: PersonsService, private val 
         return ResponseEntity.created(createdLocation).body(createdId)
     }
 
-    /*
-        TODO GET API to retrieve people around query location with a radius in KM, Use query param for radius.
-        TODO API just return a list of persons ids (JSON)
-        // Example
-        // John wants to know who is around his location within a radius of 10km
-        // API would be called using John's id and a radius 10km
+
+    /* NOTE FOR REVIEWER: ReadMe instructs this endpoint to accept params for longitude, latitude and radius,
+        but the instructions in this Controller file said to accept a person's ID & radius as params.
+        I have followed the ReadMe as it was more recently updated than the Controller file.
      */
+    @GetMapping("/nearby")
+    fun getNearbyPersons(
+        @RequestParam latitude: Double,
+        @RequestParam longitude: Double,
+        @RequestParam radiusInKm: Double
+    ): ResponseEntity<ResponseDto<NearbyPerson>> {
+        return try {
+            ResponseEntity.ok(locationsService.findAround(latitude, longitude, radiusInKm))
+        } catch (ex: IllegalArgumentException) {
+            throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid radius value: $radiusInKm")
+        }
+    }
 
     /*
         TODO GET API to retrieve a person or persons name using their ids
