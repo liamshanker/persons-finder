@@ -3,6 +3,7 @@ package com.persons.finder.presentation
 import com.persons.finder.data.Coordinates
 import com.persons.finder.data.NearbyPersons
 import com.persons.finder.data.Person
+import com.persons.finder.data.ResponseDto
 import com.persons.finder.domain.services.LocationsService
 import com.persons.finder.domain.services.PersonsService
 import org.springframework.http.HttpStatus
@@ -52,7 +53,7 @@ class PersonController (private val personsService: PersonsService, private val 
         @RequestParam latitude: Double,
         @RequestParam longitude: Double,
         @RequestParam radiusInKm: Double
-    ): ResponseEntity<List<NearbyPersons>> {
+    ): ResponseEntity<ResponseDto<NearbyPersons>> {
         return try {
             ResponseEntity.ok(locationsService.findAround(latitude, longitude, radiusInKm))
         } catch (ex: IllegalArgumentException) {
