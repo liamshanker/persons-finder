@@ -11,8 +11,9 @@ class PersonsServiceImpl(private val personsRepository: PersonsRepository) : Per
         TODO("Not yet implemented")
     }
 
-    override fun save(person: Person) {
+    override fun save(person: Person): Long {
         personsRepository.save(person)
+        return person.id
     }
 
 }
