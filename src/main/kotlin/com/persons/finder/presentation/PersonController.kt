@@ -22,6 +22,7 @@ class PersonController (
 ) {
 
     // PUT API to create/update a person's location
+    // This endpoint expects a person's ID in path and coordinates in the request body in JSON format.
     @PutMapping("/{id}/location")
     @ResponseStatus(HttpStatus.OK)
     fun updateLocation(@PathVariable id: Long, @RequestBody coordinates: Coordinates) {
@@ -37,6 +38,7 @@ class PersonController (
     }
 
     //POST API to create a person
+    // This endpoint expects a JSON object containing id & name in the request body and returns the created person's ID.
     @PostMapping("")
     fun createPerson(@RequestBody person: Person): ResponseEntity<Long> {
         if (personsRepository.existsById(person.id)) {
@@ -53,6 +55,8 @@ class PersonController (
         but the instructions in this Controller file said to accept a person's ID & radius as params.
         I have followed the ReadMe as it was more recently updated than the Controller file.
      */
+    // GET API to find persons within a radius around a given latitude and longitude
+    // This endpoint expects latitude, longitude, and radius (all as Double) as query parameters.
     @GetMapping("/nearby")
     fun getNearbyPersons(
         @RequestParam latitude: Double,
@@ -66,6 +70,8 @@ class PersonController (
         }
     }
 
+    // GET API to retrieve persons by a list of IDs
+    // This endpoint expects a list of person IDs (as Long) as a query parameters.
     @GetMapping("")
     fun getPersons(@RequestParam id: List<Long>): ResponseEntity<ResponseDto<Person>> {
         return try {

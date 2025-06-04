@@ -1,5 +1,6 @@
 package com.persons.finder.data
 
+// Util data class to help with PUT /persons/{id}/location endpoint.
 data class Coordinates(
     val latitude: Double,
     val longitude: Double

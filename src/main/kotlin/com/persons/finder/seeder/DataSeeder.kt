@@ -11,6 +11,10 @@ import org.springframework.context.annotation.Configuration
 import kotlin.math.round
 import kotlin.random.Random
 
+/**
+ * This configuration class seeds the database with initial data for testing purposes.
+ * Command line runner is used to execute the seeding logic after the application context is loaded but before the application starts serving requests
+ */
 @Configuration
 class DataSeeder(@Value("\${seed.count}") private var seedCount: Int ) {
 
