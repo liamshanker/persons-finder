@@ -15,9 +15,4 @@ data class Location(
     @Column(name = "longitude", nullable = false)
     var longitude: Double = 0.0,
 
-    //Foreign Key to Person
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "referenceId", referencedColumnName = "id")
-    var person: Person? = null
 )

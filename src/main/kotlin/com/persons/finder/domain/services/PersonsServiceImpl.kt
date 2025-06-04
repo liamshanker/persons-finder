@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 class PersonsServiceImpl(private val personsRepository: PersonsRepository) : PersonsService {
 
     override fun getById(id: Long): Person {
-        TODO("Not yet implemented")
+        return personsRepository.findById(id).get()
     }
 
     override fun save(person: Person): Long {
