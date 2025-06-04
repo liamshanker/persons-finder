@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service
 @Service
 class PersonsServiceImpl(private val personsRepository: PersonsRepository) : PersonsService {
 
-    override fun getById(id: Long): Person {
-        return personsRepository.findById(id).get()
+    override fun getByIds(id: List<Long>): List<Person> {
+        return personsRepository.findAllById(id)
     }
 
     override fun save(person: Person): Long {
