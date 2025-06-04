@@ -27,7 +27,7 @@ class PersonController (
     fun updateLocation(@PathVariable id: Long, @RequestBody coordinates: Coordinates) {
         return try {
             // Check if the person exists
-            personsService.getByIds(listOf(id))
+            personsService.getById(id)
             val location = coordinates.toLocation(id)
             locationsService.addLocation(location)
         } catch (ex: NoSuchElementException) {
@@ -67,9 +67,9 @@ class PersonController (
     }
 
     @GetMapping("")
-    fun getPersons(@RequestParam id: List<Long>): List<Person> {
+    fun getPersons(@RequestParam id: List<Long>): ResponseEntity<ResponseDto<Person>> {
         return try {
-            personsService.getByIds(id)
+            ResponseEntity.ok(personsService.getByIds(id))
         } catch (ex: IllegalArgumentException) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "List IDs must not be null or contain any null values")
         }
