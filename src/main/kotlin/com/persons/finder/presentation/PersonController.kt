@@ -1,7 +1,7 @@
 package com.persons.finder.presentation
 
 import com.persons.finder.data.Coordinates
-import com.persons.finder.data.NearbyPersons
+import com.persons.finder.data.NearbyPerson
 import com.persons.finder.data.Person
 import com.persons.finder.data.ResponseDto
 import com.persons.finder.domain.services.LocationsService
@@ -53,7 +53,7 @@ class PersonController (private val personsService: PersonsService, private val 
         @RequestParam latitude: Double,
         @RequestParam longitude: Double,
         @RequestParam radiusInKm: Double
-    ): ResponseEntity<ResponseDto<NearbyPersons>> {
+    ): ResponseEntity<ResponseDto<NearbyPerson>> {
         return try {
             ResponseEntity.ok(locationsService.findAround(latitude, longitude, radiusInKm))
         } catch (ex: IllegalArgumentException) {

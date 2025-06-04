@@ -4,7 +4,7 @@ import com.persons.finder.data.BoundingBox
 import com.persons.finder.data.Location
 import com.persons.finder.repository.LocationsRepository
 import org.springframework.stereotype.Service
-import com.persons.finder.data.NearbyPersons
+import com.persons.finder.data.NearbyPerson
 import com.persons.finder.data.ResponseDto
 import kotlin.math.cos
 
@@ -19,7 +19,7 @@ class LocationsServiceImpl(private val locationsRepository: LocationsRepository)
         TODO("Not yet implemented")
     }
 
-    override fun findAround(latitude: Double, longitude: Double, radiusInKm: Double): ResponseDto<NearbyPersons> {
+    override fun findAround(latitude: Double, longitude: Double, radiusInKm: Double): ResponseDto<NearbyPerson> {
         if (radiusInKm <= 0.0) {
             throw IllegalArgumentException("Radius must be greater than zero")
         }
@@ -34,7 +34,7 @@ class LocationsServiceImpl(private val locationsRepository: LocationsRepository)
             minLon = boundingBox.minLon,
             maxLon = boundingBox.maxLon
         ).map { row ->
-            NearbyPersons(
+            NearbyPerson(
                 id = (row[0] as Number).toLong(),
                 distance = (row[1] as Number).toDouble()
             )
