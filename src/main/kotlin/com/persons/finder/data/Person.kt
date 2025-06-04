@@ -1,6 +1,13 @@
 package com.persons.finder.data
+import javax.persistence.*
 
+@Entity
 data class Person(
-    val id: Long,
-    val name: String
+
+    @Id
+    @Column(name = "id", unique = true, nullable = false)
+    var id: Long = 0,
+
+    @Column(name = "name", nullable = false)
+    var name: String = "",
 )
