@@ -24,6 +24,7 @@ class DataSeeder(@Value("\${seed.count}") private var seedCount: Int ) {
         }
         println("Seeding initial data...")
         for (i in 1..seedCount) {
+            if (personsService.getById(i.toLong()) != null) { continue }
             val person = Person(i.toLong(), "Person $i")
 
             personsService.save(person)
