@@ -24,7 +24,9 @@ class DataSeeder(@Value("\${seed.count}") private var seedCount: Int ) {
         locationsRepository: LocationsRepository
     ): CommandLineRunner = CommandLineRunner {
         if (seedCount <= 0) {
-            println("No seeding required, seed count is set to $seedCount. If seeding is required, please set a positive value for 'seed.count' in application properties.")
+            println("Seed count is set to $seedCount, database has been cleared. If seeding is required, please set a positive value for 'seed.count' in application properties.")
+            personsRepository.deleteAll()
+            locationsRepository.deleteAll()
             return@CommandLineRunner
         }
         val batchSize = round((seedCount / 50).toDouble()).toInt()
