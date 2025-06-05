@@ -11,6 +11,10 @@ import org.springframework.context.annotation.Configuration
 import kotlin.math.round
 import kotlin.random.Random
 
+/**
+ * This configuration class seeds the database with initial data for testing purposes.
+ * Command line runner is used to execute the seeding logic after the application context is loaded but before the application starts serving requests
+ */
 @Configuration
 class DataSeeder(@Value("\${seed.count}") private var seedCount: Int ) {
 
@@ -20,7 +24,9 @@ class DataSeeder(@Value("\${seed.count}") private var seedCount: Int ) {
         locationsRepository: LocationsRepository
     ): CommandLineRunner = CommandLineRunner {
         if (seedCount <= 0) {
-            println("No seeding required, seed count is set to $seedCount. If seeding is required, please set a positive value for 'seed.count' in application properties.")
+            println("Seed count is set to $seedCount, database has been cleared. If seeding is required, please set a positive value for 'seed.count' in application properties.")
+            personsRepository.deleteAll()
+            locationsRepository.deleteAll()
             return@CommandLineRunner
         }
         val batchSize = round((seedCount / 50).toDouble()).toInt()
