@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
 
+// Instantiate Locations Repository with all default CRUD operations & custom queries
 @Repository
 interface LocationsRepository : JpaRepository<Location, Long>, JpaSpecificationExecutor<Location> {
 

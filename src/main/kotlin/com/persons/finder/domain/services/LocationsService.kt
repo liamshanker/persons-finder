@@ -8,5 +8,4 @@ interface LocationsService {
     fun addLocation(location: Location)
     fun removeLocation(locationReferenceId: Long)
     fun findAround(latitude: Double, longitude: Double, radiusInKm: Double) : ResponseDto<NearbyPerson>
-
 }

@@ -11,14 +11,20 @@ import kotlin.math.cos
 @Service
 class LocationsServiceImpl(private val locationsRepository: LocationsRepository) : LocationsService {
 
+    // Adds a location to the DB, will update if the location already exists.
     override fun addLocation(location: Location) {
         locationsRepository.save(location)
     }
 
+    // Removes a location from DB by its reference ID.
     override fun removeLocation(locationReferenceId: Long) {
-        TODO("Not yet implemented")
+        locationsRepository.deleteById(locationReferenceId)
     }
 
+    /**
+     * Given a point defined by latitude and longitude, and a radius in kilometers, calculate a bounding box around the point
+     * Then query the database for all locations within that bounding box that are within the specified radius.
+      */
     override fun findAround(latitude: Double, longitude: Double, radiusInKm: Double): ResponseDto<NearbyPerson> {
         if (radiusInKm <= 0.0) {
             throw IllegalArgumentException("Radius must be greater than zero")
